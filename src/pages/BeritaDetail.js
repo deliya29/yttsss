@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Breadcrumbs from "../components/Breadcrumbs"; // Pastikan komponen Breadcrumbs sudah ada
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const news = [
   {
@@ -13,7 +14,7 @@ const news = [
       "Tim kami meraih kemenangan gemilang dengan skor 3-0 melawan rival abadi. Gol pertama dicetak pada menit ke-15 oleh striker andalan kami.",
     content:
       "Pertandingan berlangsung sangat menegangkan di stadion utama. Gol pertama dicetak pada menit ke-15 oleh striker andalan kami, memberikan keunggulan awal. Strategi pelatih yang solid dan performa tim yang luar biasa membuat kemenangan ini menjadi momen bersejarah. Ribuan pendukung bersorak merayakan kemenangan ini.",
-    image:  require("../assets/gambar2.jpg"),
+    image: require("../assets/gambar2.jpg"),
   },
   {
     id: 2,
@@ -76,11 +77,14 @@ function BeritaDetail() {
       <div className="container mx-auto py-24">
         <div className="flex flex-col items-center">
           {/* Gambar Berita */}
-          <img
+          <LazyLoadImage
             src={berita.image}
             alt={berita.title}
             className="w-full max-w-3xl rounded-lg shadow-lg"
-            onError={(e) => (e.target.src = "/assets/placeholder.jpg")}
+            effect="opacity" // Menggunakan efek transisi tanpa blur
+            threshold={100} // Memuat gambar saat mendekati viewport
+            placeholderSrc="/assets/placeholder.jpg" // Menambahkan gambar placeholder sementara
+            onError={(e) => (e.target.src = "/assets/placeholder.jpg")} // Gambar pengganti jika gagal
           />
           <h1 className="text-4xl font-bold text-gray-800 mt-6">{berita.title}</h1>
           <p className="text-gray-600 mt-4">{berita.content}</p>

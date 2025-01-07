@@ -4,7 +4,6 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-// Fungsi untuk memotong teks deskripsi
 function truncate(text, maxLength) {
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 }
@@ -17,7 +16,7 @@ function Berita() {
       title: "Kemenangan Besar",
       description:
         "Tim kami meraih kemenangan gemilang dengan skor 3-0 melawan rival abadi. Gol pertama dicetak pada menit ke-15 oleh striker andalan kami.",
-      image:  require("../assets/gambar2.jpg")
+      image: require("../assets/gambar2.jpg"),
     },
     {
       id: 2,
@@ -39,32 +38,22 @@ function Berita() {
 
   return (
     <>
-      {/* Navbar */}
       <Navbar />
-
-      {/* Main Content */}
       <section className="py-24 bg-gray-50">
-        {/* Breadcrumbs */}
         <div className="container mx-auto -mt-20 mb-3">
           <Breadcrumbs
             links={[{ to: "/", label: "Home" }, { label: "Berita" }]}
           />
         </div>
-
         <div className="container mx-auto">
-          {/* Header Section */}
           <h2 className="text-5xl font-extrabold text-gray-800 mb-6 text-center">
             Berita
           </h2>
           <p className="text-xl text-gray-600 mb-10 text-center">
             Informasi terbaru tentang perjalanan tim kami.
           </p>
-
-          {/* Content Section */}
           {news.length === 0 ? (
-            <p className="text-center text-gray-600">
-              Belum ada berita tersedia.
-            </p>
+            <p className="text-center text-gray-600">Belum ada berita tersedia.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {news.map((item) => (
@@ -72,12 +61,12 @@ function Berita() {
                   key={item.id}
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300"
                 >
-                  {/* Gambar Berita */}
                   <div className="relative">
                     <img
                       src={item.image}
                       alt={`Berita: ${item.title}`}
                       className="w-full h-48 object-cover"
+                      loading="lazy" // Lazy loading native
                       onError={(e) =>
                         (e.target.src = "/assets/placeholder.jpg")
                       }
@@ -87,8 +76,6 @@ function Berita() {
                       <h3 className="text-lg font-bold">{item.title}</h3>
                     </div>
                   </div>
-
-                  {/* Deskripsi dan Link */}
                   <div className="p-6">
                     <p className="text-gray-600 mb-4">
                       {truncate(item.description, 100)}
@@ -107,8 +94,6 @@ function Berita() {
           )}
         </div>
       </section>
-
-      {/* Footer */}
       <Footer />
     </>
   );

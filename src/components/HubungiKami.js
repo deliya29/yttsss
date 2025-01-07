@@ -45,7 +45,7 @@ const HubungiKami = () => {
         </div>
 
         {/* Kolom Lokasi */}
-        <div className=" rounded-lg">
+        <div className="rounded-lg">
           <div className="w-full h-full bg-gray-300 rounded-lg mb-4">
             {/* Menampilkan peta dengan iframe */}
             <iframe
@@ -54,7 +54,7 @@ const HubungiKami = () => {
               height="100%"
               style={{ border: 0 }}
               allowFullScreen=""
-              loading="lazy"
+              loading="lazy"  // Lazy loading enabled here
               referrerPolicy="no-referrer-when-downgrade"
               title="Lokasi Kami"
             ></iframe>
